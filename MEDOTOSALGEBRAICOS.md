@@ -66,6 +66,7 @@ $$y(k)=X_{1}(k)$$
 
 $$y\left( k+1 \right)=X_{1}\left( k+1 \right)=X_{2}(k)$$
 
+$$y(k+2)=X_{2}(k+2)=-X_{2}(k)-0.16X_{1}(k)+2u(k)$$
 
 
 ## Igualacion de modelo por metodos algebraicos
