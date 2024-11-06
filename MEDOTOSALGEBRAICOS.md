@@ -25,9 +25,6 @@ La notación que mencionas describe las **entradas** de un sistema dinámico dis
 
 ### Entradas
 $$\( u_1(k), u_2(k), u_3(k), \dots, u_r(k) \)$$ Estas son las señales de entrada al sistema en el tiempo discreto $$\( k \)$$. El índice $$\( k \)$$ indica que estamos trabajando con un sistema de tiempo discreto, y cada $$\( u_i(k) \)$$ es la entrada correspondiente a la $$\( i \)$$-ésima señal de entrada en el instante de tiempo $$\( k \)$$.
-  
-
-
 
 
 ### Variables de Estado:
@@ -36,6 +33,28 @@ Las variables de estado $$\( x_1(k), x_2(k), \ldots, x_n(k) \)$$ representan el 
 
 ### Ecuaciones de Salida:
 Las salidas del sistema $$\( y_1(k), y_2(k), \ldots, y_m(k) \)$$ están relacionadas con el estado y las entradas del sistema. La ecuación de salida es:
+
+
+
+
+### Esquema General del Modelo:
+
+El modelo de espacio de estados se expresa generalmente de la siguiente forma:
+
+1. **Ecuación de Estado**:
+
+$$X\left( k+1 \right)= AX(k)+Bu(k)$$
+
+2. **Ecuación de Salida**:
+ 
+$$y\left( k \right)= CX\left( X \right)+Du\left( k \right)$$
+
+A es la matriz de estados
+B es la matriz de entrada
+C es la matriz de salida 
+D es la matriz de transmision directa
+
+
 
 
 
