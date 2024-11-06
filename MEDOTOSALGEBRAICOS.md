@@ -75,6 +75,9 @@ $$\left[ X_{1}(k+1)/X_{2}(k+2) \right]=\left[ 0,1/-0.16,-1 \right]\left[ X_{1}(k
 $$y=\left[ 1/0 \right]\left[ X_{1}(k)/X_{2}(k) \right]+\left[ 0 \right]u$$
 
 
+
+
+
 ## Igualacion de modelo por metodos algebraicos
 teniendo o sabiendo que G(Z) es la funcion de lazo abierto donde G(Z) es conocida y asi mismo conociendo la respuesta deseada que se representa en una funcion de transferencia de lazo cerrado Go(z) se puede realizar este metodo por igualacion de modelo para encontrar la fincion de transferencia del controladorC(z) para asegurar esa respuesta.
 
