@@ -54,8 +54,17 @@ B es la matriz de entrada
 C es la matriz de salida 
 D es la matriz de transmision directa
 
+💡 Ejemplo
 
+$$y\left( k+2 \right)+y\left( k+1 \right)+0.16y\left( k \right)= 2u\left( k \right)$$
 
+se despeja la maxima derivada:
+
+$$y\left( k+2 \right)=-y\left( k+1 \right)-0.16y\left( k \right)+2u\left( k \right)$$
+
+$$y(k)=X_{1}(k)$$
+
+$$y\left( k+1 \right)=X_{1}\left( k+1 \right)=X_{2}(k)$$
 
 
 
