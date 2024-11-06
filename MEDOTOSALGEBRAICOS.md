@@ -1,14 +1,61 @@
-# Metodos algebraicos
-estos metodos son utilizados para para obtener un determinado comportamiento en un sistema de lazo cerrado, esto se logra mediante metodos algebraicos en donde la solucion a ellos es encontrar el valor de un controlador.
-para obtener un resultado a este metodo la base fundamental es modificar la funcion de transferencia en lazo cerrado para asi encontras la respuesta deseada.
+# Espacio de estados
 
-existen ods enfoques:
-1.por igualacion de modelo
-2. por igualacion de coeficientes
-   
-r->(|c(z)->G(z)->|Go(z))y
-         
-   
+El espacio de estados es una herramienta matemática fundamental en el análisis y diseño de sistemas dinámicos. A diferencia de la función de transferencia, que solo describe la relación entre la entrada y la salida de un sistema, el espacio de estados considera todas las variables internas del sistema. Esto permite una descripción más completa de su dinámica, ya que captura tanto el comportamiento pasado como el presente del sistema, proporcionando una visión más detallada de su evolución a lo largo del tiempo.
+
+El espacio de estados describe un sistema dinámico mediante un conjunto de ecuaciones diferenciales o en diferencias, que representan cómo el estado del sistema evoluciona en el tiempo en función de las entradas y las condiciones iniciales. 
+
+En su forma más general, el modelo en espacio de estados se puede escribir como:
+
+
+### Explicación de los Conceptos en el Contexto del Espacio de Estados
+
+En el contexto de los sistemas dinámicos, el **espacio de estados** es una representación poderosa y flexible para modelar y analizar el comportamiento de un sistema a lo largo del tiempo. A continuación, se desarrollan y amplían los conceptos que mencionas:
+
+
+### Estado:
+El estado de un sistema dinámico se refiere al conjunto de variables necesarias y suficientes para describir completamente el comportamiento del sistema en un instante de tiempo dado. Dicho de otra manera, el estado del sistema contiene toda la información que es necesaria para predecir su futuro comportamiento sin necesidad de conocer su historia previa.
+
+- **Importancia del Estado**: El conocimiento del estado de un sistema permite determinar cómo se va a comportar el sistema en el futuro, si se conoce la entrada actual y las condiciones iniciales. Esto es fundamental en la teoría de control y en la simulación de sistemas.
+
+---
+
+### **Variables de Estado**:
+Las **variables de estado** son las variables que describen el estado de un sistema en un momento dado. Estas variables capturan la **información esencial** sobre el sistema y determinan su evolución futura. Dependiendo del sistema, las variables de estado pueden ser posiciones, velocidades, temperaturas, presiones, o cualquier otra magnitud relevante para el comportamiento dinámico del sistema.
+
+- **No necesariamente medibles**: Aunque las variables de estado son cruciales para entender la dinámica de un sistema, no siempre son directamente medibles. Por ejemplo, en un sistema de control de temperatura, la temperatura interna de un objeto podría ser una variable de estado, pero no siempre se puede medir directamente. En esos casos, se pueden usar estimadores o sensores indirectos.
+
+- **Medición de variables de estado en control**: Aunque las variables de estado no deben ser necesariamente medibles, en muchos **métodos de control** basados en espacio de estados (como el **control por retroalimentación de estado** o **estimación de estado**), es crucial que las variables de estado sean **medibles** o, al menos, puedan ser estimadas a partir de las salidas del sistema. Esto es esencial para calcular las señales de control adecuadas.
+
+---
+
+### **Ecuaciones de Estado**:
+Las **ecuaciones de estado** son las ecuaciones matemáticas que describen cómo evolucionan las variables de estado de un sistema a lo largo del tiempo. Estas ecuaciones se basan en las leyes que rigen el comportamiento dinámico del sistema y generalmente se expresan en una forma vectorial y matricial. 
+
+En la representación estándar en espacio de estados, las ecuaciones de estado toman la forma de:
+
+\[
+\mathbf{\dot{x}}(t) = A \mathbf{x}(t) + B \mathbf{u}(t)
+\]
+
+\[
+\mathbf{y}(t) = C \mathbf{x}(t) + D \mathbf{u}(t)
+\]
+
+Donde:
+
+- \( \mathbf{x}(t) \) es el vector de variables de estado.
+- \( \mathbf{u}(t) \) es el vector de entradas del sistema.
+- \( \mathbf{y}(t) \) es el vector de salidas.
+- Las matrices \( A \), \( B \), \( C \), y \( D \) son matrices que definen la dinámica y las interacciones entre el estado, las entradas y las salidas.
+
+Las ecuaciones de estado constituyen un sistema de **ecuaciones diferenciales (o en diferencias en sistemas discretos)** que describen cómo las variables de estado cambian con el tiempo, en función de las entradas y de su propio comportamiento dinámico.
+
+
+
+
+
+
+
 ## Igualacion de modelo por metodos algebraicos
 teniendo o sabiendo que G(Z) es la funcion de lazo abierto donde G(Z) es conocida y asi mismo conociendo la respuesta deseada que se representa en una funcion de transferencia de lazo cerrado Go(z) se puede realizar este metodo por igualacion de modelo para encontrar la fincion de transferencia del controladorC(z) para asegurar esa respuesta.
 
