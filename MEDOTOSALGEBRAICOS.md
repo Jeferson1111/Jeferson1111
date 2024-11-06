@@ -17,27 +17,25 @@ No necesariamente medibles: Aunque las variables de estado son cruciales para en
 ### Ecuaciones de Estado:
 Las ecuaciones de estado son las ecuaciones matemáticas que describen cómo evolucionan las variables de estado de un sistema a lo largo del tiempo. Estas ecuaciones se basan en las leyes que rigen el comportamiento dinámico del sistema y generalmente se expresan en una forma vectorial y matricial. 
 
-En la representación estándar en espacio de estados, las ecuaciones de estado toman la forma de:
+La representación matemática del espacio de estados para un sistema dinámico puede expresarse mediante un conjunto de ecuaciones que describen la relación entre las entradas, las salidas y las variables de estado en función del tiempo o en función de un índice discreto $$\( k \)$$. 
 
-\[
-\mathbf{\dot{x}}(t) = A \mathbf{x}(t) + B \mathbf{u}(t)
-\]
+En un sistema discreto de tiempo, los elementos clave son las *entradas*, las *salidas* y las *variables de estado*. La representación típica sigue la siguiente estructura:
 
-\[
-\mathbf{y}(t) = C \mathbf{x}(t) + D \mathbf{u}(t)
-\]
+La notación que mencionas describe las **entradas** de un sistema dinámico discreto de tiempo. En este contexto, las entradas se representan por el vector \( \mathbf{u}(k) \), y cada componente de este vector corresponde a una entrada diferente del sistema en el instante de tiempo \( k \).
 
-Donde:
-
-- \( \mathbf{x}(t) \) es el vector de variables de estado.
-- \( \mathbf{u}(t) \) es el vector de entradas del sistema.
-- \( \mathbf{y}(t) \) es el vector de salidas.
-- Las matrices \( A \), \( B \), \( C \), y \( D \) son matrices que definen la dinámica y las interacciones entre el estado, las entradas y las salidas.
-
-Las ecuaciones de estado constituyen un sistema de **ecuaciones diferenciales (o en diferencias en sistemas discretos)** que describen cómo las variables de estado cambian con el tiempo, en función de las entradas y de su propio comportamiento dinámico.
+### Entradas
+$$\( u_1(k), u_2(k), u_3(k), \dots, u_r(k) \)$$ Estas son las señales de entrada al sistema en el tiempo discreto $$\( k \)$$. El índice $$\( k \)$$ indica que estamos trabajando con un sistema de tiempo discreto, y cada $$\( u_i(k) \)$$ es la entrada correspondiente a la $$\( i \)$$-ésima señal de entrada en el instante de tiempo $$\( k \)$$.
+  
 
 
 
+
+### Variables de Estado:
+Las variables de estado $$\( x_1(k), x_2(k), \ldots, x_n(k) \)$$ representan el estado del sistema en el tiempo discreto $$\( k \)$$. Estas variables contienen toda la información necesaria para predecir el comportamiento futuro del sistema.
+
+
+### Ecuaciones de Salida:
+Las salidas del sistema $$\( y_1(k), y_2(k), \ldots, y_m(k) \)$$ están relacionadas con el estado y las entradas del sistema. La ecuación de salida es:
 
 
 
