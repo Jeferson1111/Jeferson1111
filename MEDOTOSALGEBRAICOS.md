@@ -77,19 +77,71 @@ $$y=\left[ 1/0 \right]\left[ X_{1}(k)/X_{2}(k) \right]+\left[ 0 \right]u$$
 
 
 
+## Espacio de estados a partir de funcion de transferencia
 
-## Igualacion de modelo por metodos algebraicos
-teniendo o sabiendo que G(Z) es la funcion de lazo abierto donde G(Z) es conocida y asi mismo conociendo la respuesta deseada que se representa en una funcion de transferencia de lazo cerrado Go(z) se puede realizar este metodo por igualacion de modelo para encontrar la fincion de transferencia del controladorC(z) para asegurar esa respuesta.
+### Función de Transferencia:
+Considera una función de transferencia de un sistema en tiempo discreto de la siguiente forma:
 
-se asume que G y Go son funciones causales entonces:
+$$\[
+G(z) = \frac{b_0 z^n + b_1 z^{n-1} + \cdots + b_{n-1} z + b_n}{z^n + a_1 z^{n-1} + \cdots + a_{n-1} z + a_n}
+\]$$
 
-$$G_{0}\left( S \right)= \frac{C\left( z \right)G\left( Z \right)}{1+C\left( z \right)G\left( Z \right)}$$
+Donde:
+$$\( b_0, b_1, \dots, b_n \$$ son los coeficientes del numerador (relacionados con las entradas del sistema).
+ $$\( a_1, a_2, \dots, a_n \)$$ son los coeficientes del denominador (relacionados con las variables de estado del sistema).
 
-despejando para encontrar el valor del controlador se obtiene
+es posible representar esta función de transferencia en una representación en espacio de estados de acuerdo con las dinámicas del sistema. Hay varias formas de representar el sistema en espacio de estados, y las tres formas más comunes son la forma canónica controlable, la forma canónica observable y la forma de Jordan.
 
-$$C\left( Z \right)= \frac{G_{0}\left( Z \right)}{G\left( z \right)-G_{0}\left( Z \right)G\left( Z \right)}$$
 
-NOTA: si se tiene polos fuera del circulo unitario o en z=-1, la retroalimentacion unitaria no puede ser implementada en cualquier $$G_{0}\left( Z \right)$$; debido a que los controladores podrian ser no implementables.
+### Forma Canónica Controlable
+
+En la forma canónica controlable, el modelo en espacio de estados se diseña de manera que las entradas tengan la máxima influencia posible sobre las variables de estado.
+
+
+
+### Forma Canónica Observable
+
+En la forma canónica observable, el sistema se organiza de manera que las salidas tienen la máxima influencia posible sobre las variables de estado. La forma general es:
+
+### Forma Canónica diagonal
+Este metodo es usado si se conocen los polos de la funcion de transferencia y todos son diferentes
+
+
+
+
+💡 Ejemplo
+ Conversión de Función de Transferencia a Espacio de Estados:
+
+Consideremos un sistema con la siguiente función de transferencia:
+
+$$\[
+G(z) = \frac{z + 1}{z^2 + 2z + 1}
+\]$$
+
+1. Denominador: El polinomio $$\( z^2 + 2z + 1 \)$$ corresponde a la dinámica del sistema, y lo podemos usar para construir las matrices \( A \) y \( B \).
+   
+2. Numerador: El polinomio $$\( z + 1 \)$$ se usa para definir las matrices \( C \) y \( D \), que describen cómo el estado y la entrada afectan la salida.
+
+se identifican los coeficientes de la función de transferencia:
+
+$$\[
+G(z) = \frac{b_1 z + b_0}{z^2 + a_1 z + a_0}
+\]$$
+
+
+Entonces, $$\( a_1 = 2, a_0 = 1 \)$$ y $$\( b_1 = 1, b_0 = 1 \)$$.
+
+ya depende de la forma que se utiliza se reemplaza los valores en las matrices.
+
+
+
+
+
+
+
+
+
+
 
 💡 Ejemplo
 
