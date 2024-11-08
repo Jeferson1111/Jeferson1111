@@ -229,6 +229,92 @@ K=[0.0004-1,0.2008-5,0.402-6]=[-0.996,-4.799,-5.598]
 
 📚 Ejercicio 1:
 
+tenemos el siguiente sistema:
+
+A=[0,1,0/0,0,1/-3,-4,-5]
+
+B=[0/0/1]
+
+
+se tienen los siguentes polos
+
+z = -1 
+
+ z = -2
+ 
+ z = -3 + j
+ 
+ z = -3 - j
+ 
+
+### **Paso 1: Comprobación de Controlabilidad**
+
+La matriz de controlabilidad  U  se forma como:
+$$\[
+U = [B, AB, A^2B]
+\]$$
+
+Calculamos  AB :
+
+AB=[0,1,0/0,0,1/-3,-4,-5][0/0/1]=[0,1,-5]
+
+Se calcula $$\( A^2B \)$$
+
+$$A^2B=[0,1,0/0,0,1/-3,-4,-5]^2[0/0/1]$$
+
+$$A^2=[0,0,1/-3,-4,-5/15,17,21]$$
+
+$$A^2B[[0,0,1/-3,-4,-5/15,17,21][0/0/1]=[1/-5/21]$$
+
+$$A^2B=[1/-5/21]$$
+
+U=[0,0,1/0,1,-5/1,-5,21]
+
+La determinante de u
+
+u=-1
+
+es controlable.
+
+### **Paso 2: Polinomio Característico en Lazo Abierto**
+
+El polinomio característico del sistema es:
+$$\[
+P(z) =|zI - A|
+\]$$
+
+P=[z,-1,0/0,z,-1/3,4,z+5]
+
+$$PD=Z^{3}+5Z^{2}+4Z+3$$
+
+
+
+
+### **Paso 3: Determinar la Matriz  T **
+
+Los coeficientes del polinomio en lazo abierto son $$\( a_1 = 5 \)$$, $$\( a_2 = 4 \)$$, y $$\( a_3 = 3 \)$$. La matriz $$\( T \)$$ es simplemente la matriz identidad en este caso, ya que el sistema está en forma controlable.
+
+
+T = I = 
+
+### **Paso 4: Determinar el Polinomio Deseado**
+
+
+$$\[
+P_d(z) = (z + 1)(z + 2)(z + 3 - j2)(z + 3 + j2)
+\]$$
+
+
+
+$$\[
+P_d(z) = z^4 + 9z^3 + 30z^2 + 42z + 20
+\]$$
+
+
+### **Paso 5: Calcular las Ganancias de Retroalimentación de Estados  K **
+
+
+k=[8,25,38,17]
 
 
 
@@ -236,15 +322,61 @@ K=[0.0004-1,0.2008-5,0.402-6]=[-0.996,-4.799,-5.598]
 📚Ejercicio 2:
 
 
+Consideremos un sistema con las siguientes matrices \( A \) y \( B \):
+
+A=[0,1,0/0,0,1/-6,-11,-6]
+
+B=[0/0/1]
+
+tenemos los polos:
+
+z = -1 + j
+
+ z = -1 - j
+ 
+ z = -5
+
+### **Paso 1: Comprobación de Controlabilidad**
+
+U=[0,0,1/0,1,-6/1,-6,25]=-1
+
+
+es controlable
+
+### **Paso 2: Polinomio Característico en Lazo Abierto**
+
+El polinomio característico del sistema es:
+$$\[
+P = z^3 + 6z^2 + 11z + 6
+\]$$
+
+### **Paso 3: Determinar la Matriz \( T \)**
+
+T = I 
+
+### **Paso 4: Determinar el Polinomio Deseado**
+
+Los polos deseados son \( z = -1 \pm j2 \) y \( z = -5 \). El polinomio deseado es:
+
+$$\[
+P_d(z) = (z + 1 - j2)(z + 1 + j2)(z + 5)
+\]$$
+
+$$\[
+P_d(z) = z^3 + 7z^2 + 12z + 10
+\]$$
+
+### **Paso 5: Calcular las Ganancias de Retroalimentación de Estados \( K \)**
+
+
+k=[4,1,1]
 
 
 # concluciones
 
-El espacio de estados es una representación matemática fundamental para el análisis y diseño de sistemas dinámicos. A diferencia de la función de transferencia, que solo describe la relación entre la entrada y la salida del sistema, el espacio de estados ofrece una visión más completa al modelar explícitamente las variables internas del sistema, conocidas como estados.
+Conclusión Final
+Los ejercicios muestran cómo, utilizando la controlabilidad y el diseño del controlador por retroalimentación de estados, es posible modificar el comportamiento de un sistema dinámico, moviendo los polos del sistema cerrado a las ubicaciones deseadas. Esto permite que el sistema tenga la respuesta deseada en términos de estabilidad y tiempo de respuesta, lo cual es crucial en la práctica de sistemas de control.
 
-El espacio de estados permite expresar los sistemas en términos de ecuaciones discretas o diferenciales, utilizando matrices que describen cómo los estados evolucionan en función de las entradas y cómo las salidas dependen de los estados. A través de estas matrices  A ,  B , C ,  D , se puede modelar completamente un sistema dinámico y analizar su estabilidad, controlabilidad y observabilidad, aspectos esenciales para el diseño de controladores avanzados, como los basados en retroalimentación de estados o el control óptimo.
-
-Además, el proceso de convertir una función de transferencia a un modelo en espacio de estados es un paso fundamental en muchos enfoques de diseño de control, especialmente cuando se busca una representación más detallada que permita trabajar con los estados internos del sistema. Las formas canónicas como la controlable y la observable proporcionan distintas maneras de estructurar el sistema para facilitar su análisis y control, maximizando la influencia de las entradas sobre los estados o la observación de los estados desde las salidas.
-
+La metodología que hemos seguido, que incluye la comprobación de controlabilidad, el cálculo del polinomio característico, y la determinación de las ganancias de retroalimentación, es una forma sistemática y eficiente de diseñar controladores para sistemas dinámicos.
 
 
