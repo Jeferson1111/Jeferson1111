@@ -35,7 +35,7 @@ $$U=\left[ B,AB,A^{2}B,A^{3}B....A^{n-1}B \right]$$
 
 Si el sistema es controlable, entonces el rango de la matriz de controlabilidad debe ser igual al número de variables de estado $$\( n \)$$ y el determinante de esta matriz debe ser diferente de cero. En otras palabras, si el sistema es controlable, el rango de U es igual a n.
 
-### Ejemplo
+💡 Ejemplo
 
 A=[1.5,1/1,0]
 
@@ -65,175 +65,223 @@ El determinante es 1, lo que es diferente de cero, lo que implica que el sistema
 
 
 
+**Observabilidad**
+
+Se dice que un sistema es observable en el tiempo %%\( t_0 \)%% si, con el sistema en el estado $$X(t_{0})$$, es posible determinar dicho estado observando la salida durante un intervalo de tiempo finito.
+
+En otras palabras, la observabilidad nos permite estimar cualquier variable de estado del sistema si conocemos sus entradas y salidas durante un período de tiempo. Esta propiedad es fundamental en el diseño de sistemas de control, como los controladores por retroalimentación de estados, ya que nos permite diseñar estimadores de estados cuando los estados no son directamente medibles.
 
 
+#### Matriz de Observabilidad
 
 
+V=[C/CA/CA^{2}...CA^{n-1}]
 
+Donde n es el número de estados en el sistema.su determinante debe ser diferente de cero) para que el sistema sea observable.
 
-
-### Estado:
-El estado de un sistema dinámico se refiere al conjunto de variables necesarias y suficientes para describir completamente el comportamiento del sistema en un instante de tiempo dado.
-
-### Variables de Estado:
-Las variables de estado son las variables que describen el estado de un sistema en un momento dado. Estas variables capturan la información esencial sobre el sistema y determinan su evolución futura. Dependiendo del sistema, las variables de estado pueden ser posiciones, velocidades, temperaturas, presiones, o cualquier otra magnitud relevante para el comportamiento dinámico del sistema.
-
-No necesariamente medibles: Aunque las variables de estado son cruciales para entender la dinámica de un sistema, no siempre son directamente medibles. Por ejemplo, en un sistema de control de temperatura, la temperatura interna de un objeto podría ser una variable de estado, pero no siempre se puede medir directamente. En esos casos, se pueden usar estimadores o sensores indirectos.
-
-
-### Ecuaciones de Estado:
-Las ecuaciones de estado son las ecuaciones matemáticas que describen cómo evolucionan las variables de estado de un sistema a lo largo del tiempo. Estas ecuaciones se basan en las leyes que rigen el comportamiento dinámico del sistema y generalmente se expresan en una forma vectorial y matricial. 
-
-La representación matemática del espacio de estados para un sistema dinámico puede expresarse mediante un conjunto de ecuaciones que describen la relación entre las entradas, las salidas y las variables de estado en función del tiempo o en función de un índice discreto $$\( k \)$$. 
-
-En un sistema discreto de tiempo, los elementos clave son las *entradas*, las *salidas* y las *variables de estado*. La representación típica sigue la siguiente estructura:
-
-La notación que mencionas describe las **entradas** de un sistema dinámico discreto de tiempo. En este contexto, las entradas se representan por el vector \( \mathbf{u}(k) \), y cada componente de este vector corresponde a una entrada diferente del sistema en el instante de tiempo \( k \).
-
-### Entradas
-$$\( u_1(k), u_2(k), u_3(k), \dots, u_r(k) \)$$ Estas son las señales de entrada al sistema en el tiempo discreto $$\( k \)$$. El índice $$\( k \)$$ indica que estamos trabajando con un sistema de tiempo discreto, y cada $$\( u_i(k) \)$$ es la entrada correspondiente a la $$\( i \)$$-ésima señal de entrada en el instante de tiempo $$\( k \)$$.
-
-
-### Variables de Estado:
-Las variables de estado $$\( x_1(k), x_2(k), \ldots, x_n(k) \)$$ representan el estado del sistema en el tiempo discreto $$\( k \)$$. Estas variables contienen toda la información necesaria para predecir el comportamiento futuro del sistema.
-
-
-### Ecuaciones de Salida:
-Las salidas del sistema $$\( y_1(k), y_2(k), \ldots, y_m(k) \)$$ están relacionadas con el estado y las entradas del sistema. La ecuación de salida es:
-
-
-
-
-### Esquema General del Modelo:
-
-El modelo de espacio de estados se expresa generalmente de la siguiente forma:
-
-1. **Ecuación de Estado**:
-
-$$X\left( k+1 \right)= AX(k)+Bu(k)$$
-
-2. **Ecuación de Salida**:
- 
-$$y\left( k \right)= CX\left( X \right)+Du\left( k \right)$$
-
-A es la matriz de estados
-B es la matriz de entrada
-C es la matriz de salida 
-D es la matriz de transmision directa
-
-💡 Ejemplo
-
-$$y\left( k+2 \right)+y\left( k+1 \right)+0.16y\left( k \right)= 2u\left( k \right)$$
-
-se despeja la maxima derivada:
-
-$$y\left( k+2 \right)=-y\left( k+1 \right)-0.16y\left( k \right)+2u\left( k \right)$$
-
-$$y(k)=X_{1}(k)$$
-
-$$y\left( k+1 \right)=X_{1}\left( k+1 \right)=X_{2}(k)$$
-
-$$y(k+2)=X_{2}(k+2)=-X_{2}(k)-0.16X_{1}(k)+2u(k)$$
-
-
-$$\left[ X_{1}(k+1)/X_{2}(k+2) \right]=\left[ 0,1/-0.16,-1 \right]\left[ X_{1}(k)/X_{2} (k)\right]+\left[ 0/2 \right]u$$
-
-
-$$y=\left[ 1/0 \right]\left[ X_{1}(k)/X_{2}(k) \right]+\left[ 0 \right]u$$
-
-
-
-
-## Espacio de estados a partir de funcion de transferencia
-
-### Función de Transferencia:
-se tiene una función de transferencia de un sistema en tiempo discreto:
-
-$$\[
-G(z) = \frac{b_0 z^n + b_1 z^{n-1} + \cdots + b_{n-1} z + b_n}{z^n + a_1 z^{n-1} + \cdots + a_{n-1} z + a_n}
-\]$$
-
-Donde:
-$$\( b_0, b_1, \dots, b_n \$$ son los coeficientes del numerador (relacionados con las entradas del sistema).
- $$\( a_1, a_2, \dots, a_n \)$$ son los coeficientes del denominador (relacionados con las variables de estado del sistema).
-
-es posible representar esta función de transferencia en una representación en espacio de estados de acuerdo con las dinámicas del sistema. Hay varias formas de representar el sistema en espacio de estados, y las tres formas más comunes son la forma canónica controlable, la forma canónica observable y la forma de Jordan.
-
-
-### Forma Canónica Controlable
-
-En la forma canónica controlable, el modelo en espacio de estados se diseña de manera que las entradas tengan la máxima influencia posible sobre las variables de estado.
-
-
-
-### Forma Canónica Observable
-
-En la forma canónica observable, el sistema se organiza de manera que las salidas tienen la máxima influencia posible sobre las variables de estado. La forma general es:
-
-### Forma Canónica diagonal
-Este metodo es usado si se conocen los polos de la funcion de transferencia y todos son diferentes
+ Si el rango de la matriz de observabilidad es igual al número de estados del sistema, entonces el sistema es observable.
 
 
 
 💡 Ejemplo
- Conversión de Función de Transferencia a Espacio de Estados:
 
-Consideremos un sistema con la siguiente función de transferencia:
+se tiene un sistema con dos variables de estado y las siguientes matrices:
 
-$$\[
-G(z) = \frac{z + 1}{z^2 + 2z + 1}
-\]$$
 
-1. Denominador: El polinomio $$\( z^2 + 2z + 1 \)$$ corresponde a la dinámica del sistema, y lo podemos usar para construir las matrices \( A \) y \( B \).
+A=[1.5,1/1,0]
+
+C=[2,-1]
+
+la matriz de observabilidad es:
+
+v=[C/CA]
+
+CA=[2,-1][1.5,1/1,0]=[2,2]
+
+V=[2,-1/2,2]
+
+Determinante de la matriz de observabilidad
+
+V=[2,-1/2,2]=6
+
+
+ **el sistema es observable**.
+
+### ¿Para qué sirven las condiciones de Controlabilidad y Observabilidad?
+
+Las condiciones de controlabilidad y observabilidad son fundamentales en el diseño y análisis de sistemas de control. Estas condiciones no solo determinan si un sistema es manipulable o si sus estados pueden ser estimados con precisión, sino que también garantizan la existencia de soluciones factibles para los problemas de control.
+
+
+
+## Control por retroalimentacion de estados
+
+
+
+### **Control por Retroalimentación de Estados**
+
+El **control por retroalimentación de estados** es una estrategia en la cual la señal de control \( \mathbf{u}(k) \) se genera a partir de las variables de estado del sistema. La forma general de la ley de control es:
+
+\[
+\mathbf{u}(k) = - K \mathbf{x}(k)
+\]
+
+donde:
+- \( \mathbf{u}(k) \) es la señal de control,
+- \( K \) es la matriz de ganancias de retroalimentación de estados,
+- \( \mathbf{x}(k) \) es el vector de estado del sistema.
+
+El objetivo principal de esta estrategia es **asignar los polos del sistema** en lazo cerrado de forma arbitraria mediante la matriz de ganancias \( K \). Esto implica que se puede modificar el comportamiento dinámico del sistema (en términos de su estabilidad y respuesta) ajustando los valores de \( K \) de manera que los polos del sistema cerrado estén ubicados en posiciones deseadas en el plano complejo.
+
+---
+
+### **Metodología de Diseño de Control por Retroalimentación de Estados**
+
+Para diseñar un controlador de retroalimentación de estados, se sigue un proceso estructurado:
+
+1. **Comprobar la controlabilidad del sistema**:
+   - La **controlabilidad** es la capacidad de un sistema para ser llevado de cualquier estado inicial a cualquier estado final mediante las entradas. Si el sistema no es controlable, no se puede diseñar un controlador de retroalimentación de estados.
+
+2. **Determinar los coeficientes del polinomio característico del sistema en lazo abierto**:
+   - El **polinomio característico** de un sistema es el determinante de \( \lambda I - A \), donde \( A \) es la matriz del sistema. Este polinomio tiene la forma:
+     \[
+     P(\lambda) = \det(\lambda I - A) = \lambda^n + a_1 \lambda^{n-1} + \dots + a_n
+     \]
    
-2. Numerador: El polinomio $$\( z + 1 \)$$ se usa para definir las matrices \( C \) y \( D \), que describen cómo el estado y la entrada afectan la salida.
+3. **Determinar la matriz \( T \)**:
+   - La matriz \( T \) se utiliza para transformar el sistema en **forma canónica controlable**. Si el sistema está en esta forma, entonces \( T \) será la matriz identidad \( I \). Si no, \( T \) se calcula a partir de la matriz de controlabilidad \( \mathcal{C} \) y la matriz \( W \), que es derivada de los coeficientes del polinomio característico.
 
-se identifican los coeficientes de la función de transferencia:
+4. **Determinar el polinomio deseado**:
+   - Este polinomio se obtiene a partir de la ubicación de los polos deseados. Por ejemplo, si queremos que los polos estén en \( z = -0.2 + j0.4 \), \( z = -0.2 - j0.4 \), y \( z = -0.02 \), podemos construir el polinomio deseado en lazo cerrado.
 
-$$\[
-G(z) = \frac{b_1 z + b_0}{z^2 + a_1 z + a_0}
-\]$$
+5. **Calcular las ganancias de retroalimentación de estados**:
+   - Las ganancias \( K \) se calculan resolviendo la diferencia entre el polinomio característico del sistema y el polinomio deseado. Las ganancias de retroalimentación de estados \( K \) se pueden obtener usando la fórmula:
+     \[
+     K = [\alpha_n - a_n, \alpha_{n-1} - a_{n-1}, \dots, \alpha_1 - a_1] \cdot T^{-1}
+     \]
+     donde \( \alpha_i \) son los coeficientes del polinomio deseado y \( a_i \) los del polinomio del sistema.
 
+---
 
-Entonces, $$\( a_1 = 2, a_0 = 1 \)$$ y $$\( b_1 = 1, b_0 = 1 \)$$.
+### **Ejemplo: Diseño del Controlador de Retroalimentación de Estados**
 
-ya depende de la forma que se utiliza se reemplaza los valores en las matrices.
+Consideremos un sistema con las siguientes matrices:
 
+\[
+A = \begin{bmatrix}
+0 & 1 & 0 \\
+0 & 0 & 1 \\
+-1 & -5 & -6
+\end{bmatrix}, \quad
+B = \begin{bmatrix}
+0 \\
+0 \\
+1
+\end{bmatrix}
+\]
 
-## Raices del polinomio caracteristico
+Queremos diseñar un controlador que ubique los polos del sistema cerrado en las siguientes posiciones:
 
-### calculo de los polos en el espacio de estados
+\[
+z = -0.2 + j0.4, \quad z = -0.2 - j0.4, \quad z = -0.02
+\]
 
-se resta la matriz A a la matriz identidad ZI:
+#### **Paso 1: Comprobación de Controlabilidad**
 
-$$\left| zI-A \right|=0$$
+La **matriz de controlabilidad** \( \mathcal{C} \) se calcula como:
 
-a la matriz resultante se saca la determinante y esto nos da el polinomio caracteristico.
-ya obteniendo este polinomio se pueden encontrar los polos.
+\[
+\mathcal{C} = \begin{bmatrix}
+B & AB & A^2B
+\end{bmatrix}
+\]
 
-## Espacio de estados a funcion de transferencia 
+Para el sistema dado, se calcula:
 
+\[
+AB = \begin{bmatrix} 0 & 1 & 0 \end{bmatrix} \begin{bmatrix} 0 \\ 0 \\ 1 \end{bmatrix} = \begin{bmatrix} 1 \\ 0 \\ -6 \end{bmatrix}
+\]
 
-### Sistema en espacio de estados:
+\[
+A^2B = \begin{bmatrix} 0 & 1 & 0 \\ 0 & 0 & 1 \\ -1 & -5 & -6 \end{bmatrix} \begin{bmatrix} 0 \\ 0 \\ 1 \end{bmatrix} = \begin{bmatrix} 0 \\ 1 \\ 6 \end{bmatrix}
+\]
 
-El sistema en el espacio de estados está dado por:
+La matriz de controlabilidad \( \mathcal{C} \) es:
 
-$$X\left( k+1 \right)= AX(k)+Bu(k)$$
+\[
+\mathcal{C} = \begin{bmatrix}
+0 & 1 & 0 \\
+0 & 0 & 1 \\
+1 & -6 & 6
+\end{bmatrix}
+\]
 
-$$y\left( k \right)= CX\left( X \right)+Du\left( k \right)$$
+Comprobamos el rango de \( \mathcal{C} \). Si el rango es igual al número de estados del sistema (en este caso 3), el sistema es **controlable**.
 
+En este caso, el rango de \( \mathcal{C} \) es 3, lo que significa que el sistema es controlable.
 
-se aplicar la transformada  Z 
+#### **Paso 2: Determinar el Polinomio Característico en Lazo Abierto**
 
-se despeja $$\frac{Y(z)}{U(z)}$$
+El polinomio característico del sistema se obtiene como:
 
+\[
+P(\lambda) = \det(\lambda I - A) = \lambda^3 + 6\lambda^2 + 5\lambda + 1
+\]
 
+Este es el **polinomio característico en lazo abierto**.
 
+#### **Paso 3: Determinar la Matriz \( T \)**
 
-$$\[
-\frac{Y(z)}{U(z)} = C ((z I - A)^{-1} B) + D
-\]$$
+La matriz \( T \) se construye usando los coeficientes del polinomio característico y la matriz de controlabilidad. Para este caso, \( T \) se construye con los coeficientes \( a_1 = 6 \), \( a_2 = 5 \), y \( a_3 = 1 \), dando lugar a:
 
+\[
+T = \begin{bmatrix}
+6 & 5 & 1 \\
+5 & 6 & 1 \\
+1 & 5 & 6
+\end{bmatrix}
+\]
+
+#### **Paso 4: Determinar el Polinomio Deseado**
+
+El polinomio deseado para el sistema cerrado con los polos en las ubicaciones deseadas \( z = -0.2 \pm j0.4 \) y \( z = -0.02 \) es:
+
+\[
+P_d(\lambda) = (\lambda + 0.2 - j0.4)(\lambda + 0.2 + j0.4)(\lambda + 0.02)
+\]
+
+Expandiendo este producto obtenemos el polinomio deseado:
+
+\[
+P_d(\lambda) = \lambda^3 + 0.402\lambda^2 + 0.2008\lambda + 0.0004
+\]
+
+#### **Paso 5: Calcular las Ganancias de Retroalimentación de Estados**
+
+Finalmente, calculamos las ganancias de retroalimentación de estados \( K \) usando la relación:
+
+\[
+K = [\alpha_n - a_n, \alpha_{n-1} - a_{n-1}, \dots, \alpha_1 - a_1] \cdot T^{-1}
+\]
+
+Sustituyendo los coeficientes \( \alpha_i \) del polinomio deseado y los coeficientes \( a_i \) del polinomio del sistema:
+
+\[
+K = \begin{bmatrix}
+0.004 - 1 \\
+-1 - 5 \\
+0.2008 - 5.6 \\
+0.402 - 6
+\end{bmatrix}
+T^{-1}
+\]
+
+Calculando \( T^{-1} \) y obteniendo las ganancias \( K \), finalmente obtenemos:
+
+\[
+K = \begin{bmatrix} -0.996 & -4.799 & -5.598 \end{bmatrix}
+\]
+
+Estas son las ganancias de retroalimentación de estados que colocarán los polos del sistema cerrado en las ubicaciones deseadas.
 
 
 
