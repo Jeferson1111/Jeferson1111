@@ -231,6 +231,3 @@ $$\left[ X_{1} (k+1)\right/X_{2}(k+2)]=\left[ 0,-3/1,-4 \right]\left[ X1(k)/X2(K
 
 $$y=\left[ 0,1 \right]\left[ X1(k)/X2(K) \right]$$
 
-
-
-
