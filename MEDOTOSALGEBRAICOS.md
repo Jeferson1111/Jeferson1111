@@ -148,126 +148,79 @@ Para diseñar un controlador de retroalimentación de estados, se sigue un proce
 
 
 
-### **Ejemplo: Diseño del Controlador de Retroalimentación de Estados**
+💡 Ejemplo
 
 Consideremos un sistema con las siguientes matrices:
 
-\[
-A = \begin{bmatrix}
-0 & 1 & 0 \\
-0 & 0 & 1 \\
--1 & -5 & -6
-\end{bmatrix}, \quad
-B = \begin{bmatrix}
-0 \\
-0 \\
-1
-\end{bmatrix}
-\]
+A=[0,1,0/0,0,1/-1,-5,-6]
+
+B=[0/0/1]
 
 Queremos diseñar un controlador que ubique los polos del sistema cerrado en las siguientes posiciones:
 
-\[
-z = -0.2 + j0.4, \quad z = -0.2 - j0.4, \quad z = -0.02
-\]
+z = -0.2 + j0.4
 
-#### **Paso 1: Comprobación de Controlabilidad**
+z = -0.2 - j0.4
 
-La **matriz de controlabilidad** \( \mathcal{C} \) se calcula como:
+z = -0.02
 
-\[
-\mathcal{C} = \begin{bmatrix}
-B & AB & A^2B
-\end{bmatrix}
-\]
 
-Para el sistema dado, se calcula:
+#### Comprobación de Controlabilidad
 
-\[
-AB = \begin{bmatrix} 0 & 1 & 0 \end{bmatrix} \begin{bmatrix} 0 \\ 0 \\ 1 \end{bmatrix} = \begin{bmatrix} 1 \\ 0 \\ -6 \end{bmatrix}
-\]
+La matriz de controlabilidad  se calcula como:
 
-\[
-A^2B = \begin{bmatrix} 0 & 1 & 0 \\ 0 & 0 & 1 \\ -1 & -5 & -6 \end{bmatrix} \begin{bmatrix} 0 \\ 0 \\ 1 \end{bmatrix} = \begin{bmatrix} 0 \\ 1 \\ 6 \end{bmatrix}
-\]
+$$U=[B,AB,A^2B]$$
 
-La matriz de controlabilidad \( \mathcal{C} \) es:
 
-\[
-\mathcal{C} = \begin{bmatrix}
-0 & 1 & 0 \\
-0 & 0 & 1 \\
-1 & -6 & 6
-\end{bmatrix}
-\]
+La matriz de controlabilidad U es:
 
-Comprobamos el rango de \( \mathcal{C} \). Si el rango es igual al número de estados del sistema (en este caso 3), el sistema es **controlable**.
+U=[0,0,1/0,1,-6/1,-6,31]
 
-En este caso, el rango de \( \mathcal{C} \) es 3, lo que significa que el sistema es controlable.
+ el sistema es controlable.
 
-#### **Paso 2: Determinar el Polinomio Característico en Lazo Abierto**
+
+#### Determinar el Polinomio Característico en Lazo Abierto
 
 El polinomio característico del sistema se obtiene como:
 
-\[
-P(\lambda) = \det(\lambda I - A) = \lambda^3 + 6\lambda^2 + 5\lambda + 1
-\]
+$$\[
+P(Z) = |ZI - A| = Z^3 + Z^2 + 5Z + 1
+\]$$
 
-Este es el **polinomio característico en lazo abierto**.
+Este es el polinomio característico en lazo abierto
 
-#### **Paso 3: Determinar la Matriz \( T \)**
+#### Determinar la Matriz  T 
 
-La matriz \( T \) se construye usando los coeficientes del polinomio característico y la matriz de controlabilidad. Para este caso, \( T \) se construye con los coeficientes \( a_1 = 6 \), \( a_2 = 5 \), y \( a_3 = 1 \), dando lugar a:
+La matriz T  se construye usando los coeficientes del polinomio característico y la matriz de controlabilidad. Para este caso,  T  se construye con los coeficientes  a_1 = 6 ,  a_2 = 5 , y  a_3 = 1 .
 
-\[
-T = \begin{bmatrix}
-6 & 5 & 1 \\
-5 & 6 & 1 \\
-1 & 5 & 6
-\end{bmatrix}
-\]
+W=[5,6,1/6,1,0/1,0,0]
 
-#### **Paso 4: Determinar el Polinomio Deseado**
+T=I=[1,0,0/0,1,0/0,0,1]
 
-El polinomio deseado para el sistema cerrado con los polos en las ubicaciones deseadas \( z = -0.2 \pm j0.4 \) y \( z = -0.02 \) es:
+#### Determinar el Polinomio Deseado
 
-\[
-P_d(\lambda) = (\lambda + 0.2 - j0.4)(\lambda + 0.2 + j0.4)(\lambda + 0.02)
-\]
+El polinomio deseado para el sistema cerrado con los polos en las ubicaciones deseadas 
 
-Expandiendo este producto obtenemos el polinomio deseado:
+$$\[
+P_d(Z) = (Z + 0.2 - j0.4)(Z + 0.2 + j0.4)(Z + 0.02)
+\]$$
 
-\[
-P_d(\lambda) = \lambda^3 + 0.402\lambda^2 + 0.2008\lambda + 0.0004
-\]
 
-#### **Paso 5: Calcular las Ganancias de Retroalimentación de Estados**
+$$\[
+P_d(Z) = Z^3 + 0.402Z^2 + 0.2008Z + 0.0004
+\]$$
 
-Finalmente, calculamos las ganancias de retroalimentación de estados \( K \) usando la relación:
+#### Calcular las Ganancias de Retroalimentación de Estados**
 
-\[
+
+
+$$\[
 K = [\alpha_n - a_n, \alpha_{n-1} - a_{n-1}, \dots, \alpha_1 - a_1] \cdot T^{-1}
-\]
+\]$$
 
-Sustituyendo los coeficientes \( \alpha_i \) del polinomio deseado y los coeficientes \( a_i \) del polinomio del sistema:
+Sustituyendo los coeficientes $$\( \alpha_i \$$ del polinomio deseado y los coeficientes $$\( a_i \)$$ del polinomio del sistema:
 
-\[
-K = \begin{bmatrix}
-0.004 - 1 \\
--1 - 5 \\
-0.2008 - 5.6 \\
-0.402 - 6
-\end{bmatrix}
-T^{-1}
-\]
-
-Calculando \( T^{-1} \) y obteniendo las ganancias \( K \), finalmente obtenemos:
-
-\[
-K = \begin{bmatrix} -0.996 & -4.799 & -5.598 \end{bmatrix}
-\]
-
-Estas son las ganancias de retroalimentación de estados que colocarán los polos del sistema cerrado en las ubicaciones deseadas.
+K=[0.0004-1,0.2008-5,0.402-6]=[-0.996,-4.799,-5.598]
 
 
 
