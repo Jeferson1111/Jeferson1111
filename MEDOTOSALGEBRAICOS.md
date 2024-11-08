@@ -133,8 +133,39 @@ Entonces, $$\( a_1 = 2, a_0 = 1 \)$$ y $$\( b_1 = 1, b_0 = 1 \)$$.
 ya depende de la forma que se utiliza se reemplaza los valores en las matrices.
 
 
+## Raices del polinomio caracteristico
+
+### calculo de los polos en el espacio de estados
+
+se resta la matriz A a la matriz identidad ZI:
+
+$$\left| zI-A \right|=0$$
+
+a la matriz resultante se saca la determinante y esto nos da el polinomio caracteristico.
+ya obteniendo este polinomio se pueden encontrar los polos.
+
+## Espacio de estados a funcion de transferencia 
 
 
+### Sistema en espacio de estados:
+
+El sistema en el espacio de estados está dado por:
+
+$$X\left( k+1 \right)= AX(k)+Bu(k)$$
+
+$$y\left( k \right)= CX\left( X \right)+Du\left( k \right)$$
+
+
+se aplicar la transformada  Z 
+
+se despeja $$\frac{Y(z)}{U(z)}$$
+
+
+
+
+$$\[
+\frac{Y(z)}{U(z)} = C ((z I - A)^{-1} B) + D
+\]$$
 
 
 
@@ -230,4 +261,15 @@ $$D=0$$
 $$\left[ X_{1} (k+1)\right/X_{2}(k+2)]=\left[ 0,-3/1,-4 \right]\left[ X1(k)/X2(K) \right]+\left[ 1/2 \right]u(k)$$
 
 $$y=\left[ 0,1 \right]\left[ X1(k)/X2(K) \right]$$
+
+
+# concluciones
+
+El espacio de estados es una representación matemática fundamental para el análisis y diseño de sistemas dinámicos. A diferencia de la función de transferencia, que solo describe la relación entre la entrada y la salida del sistema, el espacio de estados ofrece una visión más completa al modelar explícitamente las variables internas del sistema, conocidas como estados.
+
+El espacio de estados permite expresar los sistemas en términos de ecuaciones discretas o diferenciales, utilizando matrices que describen cómo los estados evolucionan en función de las entradas y cómo las salidas dependen de los estados. A través de estas matrices  A ,  B , C ,  D , se puede modelar completamente un sistema dinámico y analizar su estabilidad, controlabilidad y observabilidad, aspectos esenciales para el diseño de controladores avanzados, como los basados en retroalimentación de estados o el control óptimo.
+
+Además, el proceso de convertir una función de transferencia a un modelo en espacio de estados es un paso fundamental en muchos enfoques de diseño de control, especialmente cuando se busca una representación más detallada que permita trabajar con los estados internos del sistema. Las formas canónicas como la controlable y la observable proporcionan distintas maneras de estructurar el sistema para facilitar su análisis y control, maximizando la influencia de las entradas sobre los estados o la observación de los estados desde las salidas.
+
+
 
