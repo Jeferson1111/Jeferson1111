@@ -229,92 +229,13 @@ K=[0.0004-1,0.2008-5,0.402-6]=[-0.996,-4.799,-5.598]
 
 📚 Ejercicio 1:
 
-**Forma Canónica Controlable**
-
-se tiene la funcion de transferencia:
-
-$$\[
-G(z) = \frac{z + 2}{z^2 + 3z + 2}
-\]$$
-
-se identifican los coeficientes
-
-$$\[
-G(z) = \frac{b_1 z + b_0}{z^2 + a_1 z + a_0}
-\]$$
-
-
-Los coeficientes del numerador son:
-
- $$\( b_1 = 1 \)$$
-$$\( b_0 = 2 \)$$
-
-Y los coeficientes del denominador son:
-
-$$\( a_1 = 3 \)$$
-$$\( a_0 = 2 \)$$
-
-se escriben las matrices en forma canónica controlable
-
-$$A=\left[ 0,1/-2,-3 \right]$$
-
-
-$$B=\left[ 0/1 \right]$$
-
-
-$$C=\left[ 2,1 \right]$$
-
-$$D=0$$
-
- el modelo de espacio de estados en la forma canónica controlable es:
-
-
-$$\left[ X_{1} (k+1)\right/X_{2}(k+2)]=\left[ 0,1/-2,-3 \right]\left[ X1(k)/X2(K) \right]+\left[ 0/1 \right]u(k)$$
-
-$$y=\left[ 2,1 \right]\left[ X1(k)/X2(K) \right]$$
 
 
 
 
 📚Ejercicio 2:
 
-**Forma Canónica Observable**
 
-tenemos la función de transferencia:
-
-$$\[
-G(z) = \frac{2z + 1}{z^2 + 4z + 3}
-\]$$
-
-
-Los coeficientes del numerador son:
-$$\( b_1 = 2 \)$$
-$$\( b_0 = 1 \)$$
-
-Y los coeficientes del denominador son:
-$$\( a_1 = 4 \)$$
-$$\( a_0 = 3 \)$$
-
-se escribe la matriz en la forma caonica observable
-
-
-
-$$A=\left[ 0,-3/1,-4 \right]$$
-
-
-$$B=\left[ 1/2 \right]$$
-
-
-$$C=\left[ 0,1 \right]$$
-
-$$D=0$$
-
- el modelo de espacio de estados en la forma canónica observable es:
-
-
-$$\left[ X_{1} (k+1)\right/X_{2}(k+2)]=\left[ 0,-3/1,-4 \right]\left[ X1(k)/X2(K) \right]+\left[ 1/2 \right]u(k)$$
-
-$$y=\left[ 0,1 \right]\left[ X1(k)/X2(K) \right]$$
 
 
 # concluciones
