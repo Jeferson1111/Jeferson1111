@@ -1,8 +1,75 @@
-# Espacio de estados
+# Controladores por Retroalimentación de Estados
 
-El espacio de estados es una herramienta matemática fundamental en el análisis y diseño de sistemas dinámicos. A diferencia de la función de transferencia, que solo describe la relación entre la entrada y la salida de un sistema, el espacio de estados considera todas las variables internas del sistema. Esto permite una descripción más completa de su dinámica, ya que captura tanto el comportamiento pasado como el presente del sistema, proporcionando una visión más detallada de su evolución a lo largo del tiempo.
+## Controlabilidad y Observabilidad
 
-El espacio de estados describe un sistema dinámico mediante un conjunto de ecuaciones diferenciales o en diferencias, que representan cómo el estado del sistema evoluciona en el tiempo en función de las entradas y las condiciones iniciales. 
+**Controlabilidad**  
+La controlabilidad se refiere a la capacidad de un sistema para ser manipulado o dirigido a cualquier estado deseado, utilizando el control adecuado.
+
+Un sistema es controlable en un tiempo $$\( t_0 \)$$ si, desde cualquier estado inicial $$\( x(t_0) \)$$, se puede transferir a cualquier otro estado en un intervalo de tiempo finito.
+  
+
+#### Matriz de Controlabilidad
+
+En sistemas discretos, el comportamiento del sistema es:
+
+$$\[
+x(k+1) = A x(k) + B u(k)
+\]$$
+$$\[
+y(k) = C x(k) + D u(k)
+\]$$
+
+Donde:
+
+$$\( x(k) \)$$ es el vector de estado en el tiempo $$\( k \)$$,
+
+$$\( u(k) \)$$ es el vector de control en el tiempo $$\( k \)$$,
+
+$$\( y(k) \$$) es la salida en el tiempo $$\( k \)$$,
+
+$$\( A \)$$, $$\( B \)$$, y $$\( C \)$$ son matrices del sistema.
+
+La matriz de controlabilidad se construye:
+
+$$U=\left[ B,AB,A^{2}B,A^{3}B....A^{n-1}B \right]$$
+
+Si el sistema es controlable, entonces el rango de la matriz de controlabilidad debe ser igual al número de variables de estado $$\( n \)$$ y el determinante de esta matriz debe ser diferente de cero. En otras palabras, si el sistema es controlable, el rango de U es igual a n.
+
+### Ejemplo
+
+A=[1.5,1/1,0]
+
+B=[1/0]
+
+y=[2,-1]
+
+
+
+Queremos verificar si el sistema es controlable.
+
+La matriz de controlabilidad  es:
+
+U=[B,AB]
+
+AB=[1.5,1/1,0][1/0]=[1.5/1]
+
+
+U=[1,1.5/0,1]
+
+Determinante de la matriz de controlabilidad
+
+U=[1,1.5/0,1]=1
+
+
+El determinante es 1, lo que es diferente de cero, lo que implica que el sistema es **controlable**.
+
+
+
+
+
+
+
+
 
 
 ### Estado:
