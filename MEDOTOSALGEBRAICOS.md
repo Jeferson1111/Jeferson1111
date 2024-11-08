@@ -119,48 +119,34 @@ Las condiciones de controlabilidad y observabilidad son fundamentales en el dise
 
 ### **Control por Retroalimentación de Estados**
 
-El **control por retroalimentación de estados** es una estrategia en la cual la señal de control \( \mathbf{u}(k) \) se genera a partir de las variables de estado del sistema. La forma general de la ley de control es:
 
-\[
-\mathbf{u}(k) = - K \mathbf{x}(k)
-\]
+El objetivo principal de esta estrategia es asignar los polos del sistema en lazo cerrado de forma arbitraria mediante la matriz de ganancias  K . Esto implica que se puede modificar el comportamiento dinámico del sistema (en términos de su estabilidad y respuesta) ajustando los valores de  K  de manera que los polos del sistema cerrado estén ubicados en posiciones deseadas en el plano complejo.
 
-donde:
-- \( \mathbf{u}(k) \) es la señal de control,
-- \( K \) es la matriz de ganancias de retroalimentación de estados,
-- \( \mathbf{x}(k) \) es el vector de estado del sistema.
+u(k)=-k*x(k)
 
-El objetivo principal de esta estrategia es **asignar los polos del sistema** en lazo cerrado de forma arbitraria mediante la matriz de ganancias \( K \). Esto implica que se puede modificar el comportamiento dinámico del sistema (en términos de su estabilidad y respuesta) ajustando los valores de \( K \) de manera que los polos del sistema cerrado estén ubicados en posiciones deseadas en el plano complejo.
 
----
-
-### **Metodología de Diseño de Control por Retroalimentación de Estados**
+### Metodología de Diseño de Control por Retroalimentación de Estados
 
 Para diseñar un controlador de retroalimentación de estados, se sigue un proceso estructurado:
 
-1. **Comprobar la controlabilidad del sistema**:
-   - La **controlabilidad** es la capacidad de un sistema para ser llevado de cualquier estado inicial a cualquier estado final mediante las entradas. Si el sistema no es controlable, no se puede diseñar un controlador de retroalimentación de estados.
-
-2. **Determinar los coeficientes del polinomio característico del sistema en lazo abierto**:
-   - El **polinomio característico** de un sistema es el determinante de \( \lambda I - A \), donde \( A \) es la matriz del sistema. Este polinomio tiene la forma:
+1. Comprobar la controlabilidad del sistema
+2. Determinar los coeficientes del polinomio característico del sistema en lazo abierto:
+   - El polinomio característico de un sistema es el determinante de $$\( ZI - A \)$$, donde  A  es la matriz del sistema. Este polinomio tiene la forma:
      \[
-     P(\lambda) = \det(\lambda I - A) = \lambda^n + a_1 \lambda^{n-1} + \dots + a_n
-     \]
+     $$\|ZI - A |= Z^n + a_1 Z^{n-1} + \dots + a_n
+     \]$$
    
-3. **Determinar la matriz \( T \)**:
-   - La matriz \( T \) se utiliza para transformar el sistema en **forma canónica controlable**. Si el sistema está en esta forma, entonces \( T \) será la matriz identidad \( I \). Si no, \( T \) se calcula a partir de la matriz de controlabilidad \( \mathcal{C} \) y la matriz \( W \), que es derivada de los coeficientes del polinomio característico.
+3. Determinar La matriz T.Se utiliza para transformar el sistema en forma canónica controlable. Si el sistema está en esta forma, entonces  T  será la matriz identidad  I . Si no,  T  se calcula a partir de la matriz de controlabilidad U y la matriz  W (T=UW).
 
-4. **Determinar el polinomio deseado**:
-   - Este polinomio se obtiene a partir de la ubicación de los polos deseados. Por ejemplo, si queremos que los polos estén en \( z = -0.2 + j0.4 \), \( z = -0.2 - j0.4 \), y \( z = -0.02 \), podemos construir el polinomio deseado en lazo cerrado.
+4. Determinar el polinomio deseado. Este polinomio se obtiene a partir de la ubicación de los polos deseados. Por ejemplo, si queremos que los polos estén en \( z = -0.2 + j0.4 \), \( z = -0.2 - j0.4 \), y \( z = -0.02 \), podemos construir el polinomio deseado en lazo cerrado.
 
-5. **Calcular las ganancias de retroalimentación de estados**:
-   - Las ganancias \( K \) se calculan resolviendo la diferencia entre el polinomio característico del sistema y el polinomio deseado. Las ganancias de retroalimentación de estados \( K \) se pueden obtener usando la fórmula:
-     \[
+5. Calcular las ganancias de retroalimentación de estados. Las ganancias  K  se calculan resolviendo la diferencia entre el polinomio característico del sistema y el polinomio deseado. Las ganancias de retroalimentación de estados  K se pueden obtener usando la fórmula:
+     $$\[
      K = [\alpha_n - a_n, \alpha_{n-1} - a_{n-1}, \dots, \alpha_1 - a_1] \cdot T^{-1}
-     \]
-     donde \( \alpha_i \) son los coeficientes del polinomio deseado y \( a_i \) los del polinomio del sistema.
+     \]$$
+     donde $$\( \alpha_i \)$$ son los coeficientes del polinomio deseado y $$\( a_i \)$$ los del polinomio del sistema.
 
----
+
 
 ### **Ejemplo: Diseño del Controlador de Retroalimentación de Estados**
 
