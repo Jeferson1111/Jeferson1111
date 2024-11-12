@@ -167,8 +167,87 @@ se dividern las ganancias
 4. Implementamos el esquema de control $$\( u(k) = -K x(k) + K_i v(k) \)$$ para lograr el seguimiento integral y eliminar el error de estado estacionario.
 
 
+## Diseño de un Observador de Estados
+
+Un observador de estados es una herramienta fundamental en sistemas de control cuando no es posible medir directamente todas las variables de estado del sistema. Los observadores permiten estimar estas variables no medibles a partir de las mediciones de salida disponibles y las entradas del sistema. Esta estimación de los estados es esencial para poder implementar un controlador por retroalimentación de estados, que requiere la medición o estimación de todas las variables de estado.
+
+ **Consideraciones sobre los Observadores de Estados**
+
+-Limitación del controlador por retroalimentación de estados:El diseño de un controlador por retroalimentación de estados requiere tener acceso a todas las variables de estado del sistema. Sin embargo, en muchos casos no es posible medir todas las variables de estado directamente, ya sea por limitaciones en los sensores, costo o complejidad.
+   
+Solución: el Observador de Estados.
+   - Un observador de estados estima las variables de estado no medibles a partir de las mediciones de salida y las entradas del sistema. Esto permite la retroalimentación de todos los estados, incluso cuando algunos de ellos no son directamente accesibles.
 
 
+
+### Modelo de Error de Estimación
+
+Sea el sistema descrito por las siguientes ecuaciones en espacio de estados:
+
+- Ecuaciones del sistema real:
+
+$$\[
+x(k+1) = A x(k) + B u(k)
+\]$$
+
+- Ecuaciones del observador de estados:
+
+$$\[
+\hat{x}(k+1) = A \hat{x}(k) + B y(k) + Kp \left( y(k) - C \hat{x}(k) \right)
+\]$$
+
+donde:
+- $$\( x(k) \)$$ es el vector de estado real,
+- $$\( \hat{x}(k) \)$$ es el vector de estado estimado,
+- $$\( y(k) = C x(k) \)$$ es la salida del sistema,
+- $$\( kp \)$$ es la matriz de ganancias del observador, que determinará cómo se corrige el error de estimación basado en la diferencia entre la salida medida $$\( y(k) \)$$ y la salida estimada $$\( C \hat{x}(k) \)$$.
+
+El error de estimación se puede modelar de la siguiente manera:
+
+$$\[
+e(k+1) =A(x-\hat{x})
+\]$$
+
+Sustituyendo las ecuaciones de la dinámica del sistema real y el observador, obtenemos:
+
+
+$$\[
+e(k+1) = (A - KeC) e(k)
+\]$$
+
+
+
+## Metodología de Diseño de un Observador de Estados
+
+
+1. Comprobar la Observabilidad del Sistema
+
+2. Determinar los Coeficientes del Polinomio Característico (Lazo Abierto)
+
+
+$$\[
+\det(Z I - A) = Z^n + a_1 Z^{n-1} + \cdots + a_{n-1} Z + a_n
+\]$$
+
+Esto nos da los coeficientes del polinomio característico $$\( a_1, a_2, \dots, a_n \)$$.
+
+3. Determinar la Matriz $$\( Q \)$$ del Observador
+
+Para el diseño del observador, es importante definir la matriz $$\( Q \)$$. Si el sistema está en forma canónica observable, la matriz $$\( Q \)$$ será simplemente la matriz identidad $$\( I \)$$. Sin embargo, si el sistema no está en esta forma, se requiere una transformación adicional  Q=WV.
+
+4. Determinar el Polinomio Deseado para el Observador
+
+El siguiente paso es definir el polinomio deseado para el observador. Esto corresponde a la ubicación de los polos del observador. El polinomio deseado para el observador tendrá la forma:
+
+$$\[
+Z^n + \alpha_1 Z^{n-1} + \cdots + \alpha_{n-1} Z + \alpha_n
+\]$$
+
+Aquí, los coeficientes $$\( \alpha_1, \alpha_2, \dots, \alpha_n \)$$ corresponden a los polos deseados para el observador.
+
+ 5. Calcular la Matriz de Ganancias del Observador
+
+$$K=Q^{-1}[\tau _{n}-a_{n}]
 
 💡 Ejemplo
 
