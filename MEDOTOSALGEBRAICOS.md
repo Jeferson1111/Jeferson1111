@@ -254,13 +254,13 @@ $$Q^{-1}$$ [an-an]
 
 Diseñar el observador de estados para el sistema:
 
-A=[1.799,-0.8025/1,0]
+$$A=[1.799,-0.8025/1,0]$$
 
 
-B=[0.01563,0]
+$$B=[0.01563,0]$$
 
 
-C=[0.01191,0,01107]
+$$C=[0.01191,0,01107]$$
 
 ubicando los polos del observador en:
 
@@ -352,126 +352,90 @@ $$W=[-3,1/1,0]$$
 
 $$Q=[0.05,-0.79/0.3,0.2]$$
 
-\[
-W = \begin{bmatrix} 
--(a_1) & 1 \\
--a_2 & 0
-\end{bmatrix}
-= \begin{bmatrix} 
--3 & 1 \\
--0.75 & 0
-\end{bmatrix}
-\]
-
-Ahora, calculamos la matriz \( Q \) como:
-
-\[
-Q = W \cdot \mathcal{O}
-\]
-
-Para que puedas seguir este paso, tendrías que multiplicar las matrices \( W \) y \( \mathcal{O} \). La multiplicación de matrices se lleva a cabo de la siguiente manera:
-
-\[
-Q = \begin{bmatrix} 
--3 & 1 \\
--0.75 & 0
-\end{bmatrix} \begin{bmatrix} 
-0.3 & 0.2 \\
-0.9 & -0.19
-\end{bmatrix}
-\]
-
-Al realizar la multiplicación, obtienes \( Q \), la cual será utilizada para el siguiente paso.
-
----
-
-#### **Paso 4: Determinar el Polinomio Deseado para el Observador**
-
-El polinomio deseado para el observador debe tener los polos ubicados en \( z = -0.4 \) con multiplicidad 2. El polinomio correspondiente es:
-
-\[
-(\lambda + 0.4)^2 = \lambda^2 + 0.8 \lambda + 0.16
-\]
-
-De aquí, identificamos los coeficientes \( a_1 = 0.8 \) y \( a_2 = 0.16 \).
-
----
-
-#### **Paso 5: Calcular las Ganancias del Observador**
-
-Las ganancias del observador \( K_e \) se calculan a partir de la fórmula:
-
-\[
-K_e = Q^{-1} \begin{bmatrix} 
-a_1 - a_1' \\
-a_2 - a_2'
-\end{bmatrix}
-\]
-
-donde \( a_1' \) y \( a_2' \) son los coeficientes del polinomio característico del sistema y \( a_1 \) y \( a_2 \) son los coeficientes del polinomio deseado para el observador. 
-
-Usando las matrices y los coeficientes obtenidos, calculamos \( K_e \). Este vector de ganancias garantiza que los polos del observador estén ubicados en los valores deseados.
 
 
+
+- Determinar el Polinomio Deseado para el Observador
+
+El polinomio deseado para el observador debe tener los polos ubicados en $$\( z = -0.4 \)$$ con multiplicidad 2. El polinomio correspondiente es:
+
+$$\[
+(z + 0.4)^2 = z^2 + 0.8 z + 0.16
+\]$$
+
+ $$\( a_1 = 0.8 \)$$ y $$\( a_2 = 0.16 \)$$
+
+
+- Calcular las Ganancias del Observador
+
+$$K_{e}=Q^{-1}[-2.39/-2.2]$$
+
+$$K_{e}=[-8.917/2.4575]$$
 
 📚Ejercicio 2:
 
+tenemos las matrices:
 
-Consideremos un sistema con las siguientes matrices \( A \) y \( B \):
+$$A=[2.2,-0.5/1,0.8]$$
 
-A=[0,1,0/0,0,1/-6,-11,-6]
-
-B=[0/0/1]
-
-tenemos los polos:
-
-z = -1 + j
-
- z = -1 - j
- 
- z = -5
-
-### **Paso 1: Comprobación de Controlabilidad**
-
-U=[0,0,1/0,1,-6/1,-6,25]=-1
+$$B=[0.4/0]$$
 
 
-es controlable
+$$C=[0.6,0.2]$$
 
-### **Paso 2: Polinomio Característico en Lazo Abierto**
 
-El polinomio característico del sistema es:
-$$\[
-P = z^3 + 6z^2 + 11z + 6
-\]$$
+Diseñar un observador de estados para este sistema, ubicando los polos del observador en $$\( z = -0.9 \)$$ y $$\( z = -0.6 \)$$
 
-### **Paso 3: Determinar la Matriz \( T \)**
 
-T = I 
 
-### **Paso 4: Determinar el Polinomio Deseado**
 
-Los polos deseados son \( z = -1 \pm j2 \) y \( z = -5 \). El polinomio deseado es:
+- Comprobar la Observabilidad del Sistema
+
+
+$$V=[0.6,0.2/1.52,-0.14]$$
+
+DET=-0.388  es observable
+
+
+- Determinar el Polinomio Característico del Sistema
+
 
 $$\[
-P_d(z) = (z + 1 - j2)(z + 1 + j2)(z + 5)
+\det(Z I - A) = 0
 \]$$
+
+polinomio del característico es:
+
 
 $$\[
-P_d(z) = z^3 + 7z^2 + 12z + 10
+z^2 - 3z + 2.26
 \]$$
 
-### **Paso 5: Calcular las Ganancias de Retroalimentación de Estados \( K \)**
+- Determinar la Matriz  Q 
+
+$$W=[-3,1/1,0]$$
+
+$$Q=[-0.28,-0.74/0.6,0.2]$$
 
 
-k=[4,1,1]
+- Determinar el Polinomio Deseado para el Observador
+
+$$\[
+(z + 0.9)(z + 0.6) = z^2 + 1.5z + 0.54
+\]$$
+
+
+
+- Calcular las Ganancias del Observador
+
+
+$$Ke=[7.6959/-0.5876]$$
 
 
 # concluciones
 
-Conclusión Final
-Los ejercicios muestran cómo, utilizando la controlabilidad y el diseño del controlador por retroalimentación de estados, es posible modificar el comportamiento de un sistema dinámico, moviendo los polos del sistema cerrado a las ubicaciones deseadas. Esto permite que el sistema tenga la respuesta deseada en términos de estabilidad y tiempo de respuesta, lo cual es crucial en la práctica de sistemas de control.
+El diseño de un observador de estados combinado con un controlador integral es una estrategia poderosa para resolver el problema de seguimiento de referencia y eliminar el error de estado estacionario en sistemas dinámicos. Este enfoque permite a los sistemas funcionar de manera eficiente y precisa incluso cuando no todas las variables de estado son directamente medibles, lo cual es común en muchas aplicaciones de control real.
 
-La metodología que hemos seguido, que incluye la comprobación de controlabilidad, el cálculo del polinomio característico, y la determinación de las ganancias de retroalimentación, es una forma sistemática y eficiente de diseñar controladores para sistemas dinámicos.
+Al seguir los pasos adecuados, como comprobar la observabilidad, calcular el polinomio característico, diseñar el observador, y definir las ganancias adecuadas, es posible diseñar un sistema robusto y eficiente que cumpla con los requisitos de rendimiento y estabilidad.
 
 
