@@ -69,9 +69,9 @@ Combinando las ecuaciones
 Ahora, tenemos dos ecuaciones que describen la dinámica del sistema. 
 
 
-[x(k+1)/v(k+1)]=[A,0/-C,1][X(k)/v(k)]+[B/0]u(K)+[0/1]r
+$$[x(k+1)/v(k+1)]=[A,0/-C,1][X(k)/v(k)]+[B/0]u(K)+[0/1]r$$
 
-y(k)=[C,0][x(k)v(k)]
+$$y(k)=[C,0][x(k)v(k)]$$
 
 
 ### seguimiento integral
@@ -94,9 +94,9 @@ $$K_i$$ es la ganancia para el seguimiento integral
 Reescribiendo de forma matricial:
 
 
-u=-[k-ki][x/v]
+$$u=-[k-ki][x/v]$$
 
-u=-ka xa
+$$u=-ka xa$$
 
 
 El vector  K  controla la dinámica del estado del sistema. Es de tamaño  n- 1  y se aplica directamente al estado  x(k)  del sistema. Esto regula cómo se comportan las variables de estado del sistema.
@@ -143,15 +143,15 @@ Ampliar el Sistema con la Acción Integral
 
   - Matriz de transición ampliada $$\( A_a \)$$:
 
-Aa=[-13,-5.84,5.78,0/-5.84,-16.26,-5.35,0/5.78,-5.35,-7.64,0/-0.48,-1.03,-0.72,1]
+$$Aa=[-13,-5.84,5.78,0/-5.84,-16.26,-5.35,0/5.78,-5.35,-7.64,0/-0.48,-1.03,-0.72,1]$$
 
   - Matriz de entrada ampliada $$\( B_a \)$$:
 
-Ba=[-1.2/0.71/1.63/0]
+$$Ba=[-1.2/0.71/1.63/0]$$
 
   - Matriz de salida ampliada $$\( C_a \)$$:
 
-  Ca=[0.48,1.3,0.72,0]
+ $$Ca=[0.48,1.3,0.72,0]$$
 
 - Calcular el Vector de Ganancias  K_a  Usando Ackermann o polos(polinomio deseado en lazo cerrado).
 
@@ -270,13 +270,13 @@ z=-0.2  y  z=-0.2
 
 matriz de observabilidad
 
-v=[0.0119,0.0111/0.0325,-0.0096]
+$$v=[0.0119,0.0111/0.0325,-0.0096]$$
 
 determinante=-0.00004735  el sistema es observable
 
 -se obtiene el polinomio caracteristico |zI-A|
 
-|zI-A|=[z-1.799,0.8025/-1,z]
+$$|zI-A|=[z-1.799,0.8025/-1,z]$$
 
 |zI-A|= $$z^{2}-(1.799z)+0.8025$$
 
@@ -286,9 +286,9 @@ a1=-1.799 y a2=0.8
 
 Q=WV
 
-W=[-1.799,1/1,0]
+$$W=[-1.799,1/1,0]$$
 
-Q=[0.0111,-2.0295/0.0119,0.0111]
+$$Q=[0.0111,-2.0295/0.0119,0.0111]$$
 
 -Se obtiene el polinomio deseado
 
@@ -300,116 +300,9 @@ a1=0.4 y a2=0.04
 
 -se calcula las ganancias del observador
 
+$$K_{e}=\left[ 0.0111,-0.0295/0.0119,0.0111 \right]^{-1}$$ $$[0.04-0.8/0.4--1.799]$$
 
-
-
-
-
-### **Control por Retroalimentación de Estados**
-
-
-El objetivo principal de esta estrategia es asignar los polos del sistema en lazo cerrado de forma arbitraria mediante la matriz de ganancias  K . Esto implica que se puede modificar el comportamiento dinámico del sistema (en términos de su estabilidad y respuesta) ajustando los valores de  K  de manera que los polos del sistema cerrado estén ubicados en posiciones deseadas en el plano complejo.
-
-u(k)=-k*x(k)
-
-
-### Metodología de Diseño de Control por Retroalimentación de Estados
-
-Para diseñar un controlador de retroalimentación de estados, se sigue un proceso estructurado:
-
-1. Comprobar la controlabilidad del sistema
-2. Determinar los coeficientes del polinomio característico del sistema en lazo abierto:
-   - El polinomio característico de un sistema es el determinante de $$\( ZI - A \)$$, donde  A  es la matriz del sistema. Este polinomio tiene la forma:
-     \[
-     $$\|ZI - A |= Z^n + a_1 Z^{n-1} + \dots + a_n
-     \]$$
-   
-3. Determinar La matriz T.Se utiliza para transformar el sistema en forma canónica controlable. Si el sistema está en esta forma, entonces  T  será la matriz identidad  I . Si no,  T  se calcula a partir de la matriz de controlabilidad U y la matriz  W (T=UW).
-
-4. Determinar el polinomio deseado. Este polinomio se obtiene a partir de la ubicación de los polos deseados. Por ejemplo, si queremos que los polos estén en \( z = -0.2 + j0.4 \), \( z = -0.2 - j0.4 \), y \( z = -0.02 \), podemos construir el polinomio deseado en lazo cerrado.
-
-5. Calcular las ganancias de retroalimentación de estados. Las ganancias  K  se calculan resolviendo la diferencia entre el polinomio característico del sistema y el polinomio deseado. Las ganancias de retroalimentación de estados  K se pueden obtener usando la fórmula:
-     $$\[
-     K = [\alpha_n - a_n, \alpha_{n-1} - a_{n-1}, \dots, \alpha_1 - a_1] \cdot T^{-1}
-     \]$$
-     donde $$\( \alpha_i \)$$ son los coeficientes del polinomio deseado y $$\( a_i \)$$ los del polinomio del sistema.
-
-
-
-💡 Ejemplo
-
-Consideremos un sistema con las siguientes matrices:
-
-A=[0,1,0/0,0,1/-1,-5,-6]
-
-B=[0/0/1]
-
-Queremos diseñar un controlador que ubique los polos del sistema cerrado en las siguientes posiciones:
-
-z = -0.2 + j0.4
-
-z = -0.2 - j0.4
-
-z = -0.02
-
-
-#### Comprobación de Controlabilidad
-
-La matriz de controlabilidad  se calcula como:
-
-$$U=[B,AB,A^2B]$$
-
-
-La matriz de controlabilidad U es:
-
-U=[0,0,1/0,1,-6/1,-6,31]
-
- el sistema es controlable.
-
-
-#### Determinar el Polinomio Característico en Lazo Abierto
-
-El polinomio característico del sistema se obtiene como:
-
-$$\[
-P(Z) = |ZI - A| = Z^3 + Z^2 + 5Z + 1
-\]$$
-
-Este es el polinomio característico en lazo abierto
-
-#### Determinar la Matriz  T 
-
-La matriz T  se construye usando los coeficientes del polinomio característico y la matriz de controlabilidad. Para este caso,  T  se construye con los coeficientes  a_1 = 6 ,  a_2 = 5 , y  a_3 = 1 .
-
-W=[5,6,1/6,1,0/1,0,0]
-
-T=I=[1,0,0/0,1,0/0,0,1]
-
-#### Determinar el Polinomio Deseado
-
-El polinomio deseado para el sistema cerrado con los polos en las ubicaciones deseadas 
-
-$$\[
-P_d(Z) = (Z + 0.2 - j0.4)(Z + 0.2 + j0.4)(Z + 0.02)
-\]$$
-
-
-$$\[
-P_d(Z) = Z^3 + 0.402Z^2 + 0.2008Z + 0.0004
-\]$$
-
-#### Calcular las Ganancias de Retroalimentación de Estados**
-
-
-
-$$\[
-K = [\alpha_n - a_n, \alpha_{n-1} - a_{n-1}, \dots, \alpha_1 - a_1] \cdot T^{-1}
-\]$$
-
-Sustituyendo los coeficientes $$\( \alpha_i \$$ del polinomio deseado y los coeficientes $$\( a_i \)$$ del polinomio del sistema:
-
-K=[0.0004-1,0.2008-5,0.402-6]=[-0.996,-4.799,-5.598]
-
+$$ke=[119.0909,70.5173]$$
 
 
 
@@ -417,93 +310,107 @@ K=[0.0004-1,0.2008-5,0.402-6]=[-0.996,-4.799,-5.598]
 
 📚 Ejercicio 1:
 
-tenemos el siguiente sistema:
+Sistema:
 
-A=[0,1,0/0,0,1/-3,-4,-5]
+Matriz de estado $$\( A \)$$:
 
-B=[0/0/1]
+$$A=[2.5,-1.3/1,0.5]$$
+
+$$B=[0.1/0]$$
+
+$$C=[0.3,0.2]$$
 
 
-se tienen los siguentes polos
+Diseñar el observador de estados para este sistema, ubicando los polos del observador en $$\( z = -0.4 \)$$ (con multiplicidad 2).
 
-z = -1 
 
- z = -2
- 
- z = -3 + j
- 
- z = -3 - j
- 
+- Comprobar la Observabilidad del Sistema
 
-### **Paso 1: Comprobación de Controlabilidad**
+$$v=[0.3,0.2/0.95,-0.19]$$
 
-La matriz de controlabilidad  U  se forma como:
-$$\[
-U = [B, AB, A^2B]
-\]$$
-
-Calculamos  AB :
-
-AB=[0,1,0/0,0,1/-3,-4,-5][0/0/1]=[0,1,-5]
-
-Se calcula $$\( A^2B \)$$
-
-$$A^2B=[0,1,0/0,0,1/-3,-4,-5]^2[0/0/1]$$
-
-$$A^2=[0,0,1/-3,-4,-5/15,17,21]$$
-
-$$A^2B[[0,0,1/-3,-4,-5/15,17,21][0/0/1]=[1/-5/21]$$
-
-$$A^2B=[1/-5/21]$$
-
-U=[0,0,1/0,1,-5/1,-5,21]
-
-La determinante de u
-
-u=-1
-
-es controlable.
-
-### **Paso 2: Polinomio Característico en Lazo Abierto**
-
-El polinomio característico del sistema es:
-$$\[
-P(z) =|zI - A|
-\]$$
-
-P=[z,-1,0/0,z,-1/3,4,z+5]
-
-$$PD=Z^{3}+5Z^{2}+4Z+3$$
+det[v]=-0.2470  el sistema es observable
 
 
 
 
-### **Paso 3: Determinar la Matriz  T **
-
-Los coeficientes del polinomio en lazo abierto son $$\( a_1 = 5 \)$$, $$\( a_2 = 4 \)$$, y $$\( a_3 = 3 \)$$. La matriz $$\( T \)$$ es simplemente la matriz identidad en este caso, ya que el sistema está en forma controlable.
-
-
-T = I = 
-
-### **Paso 4: Determinar el Polinomio Deseado**
+- Determinar el Polinomio Característico del Sistema
 
 
 $$\[
-P_d(z) = (z + 1)(z + 2)(z + 3 - j2)(z + 3 + j2)
+\det(z I - A) = 0
 \]$$
 
+$$zI-A=[z-2.5,1.3/-1,z-0.5]$$
+
+$$|zI - A|=z^2 - 3z + 2.55$$
 
 
-$$\[
-P_d(z) = z^4 + 9z^3 + 30z^2 + 42z + 20
-\]$$
 
+-  Determinar la Matriz $$\( Q \)$$
 
-### **Paso 5: Calcular las Ganancias de Retroalimentación de Estados  K **
+$$W=[-3,1/1,0]$$
 
+$$Q=[0.05,-0.79/0.3,0.2]$$
 
-k=[8,25,38,17]
+\[
+W = \begin{bmatrix} 
+-(a_1) & 1 \\
+-a_2 & 0
+\end{bmatrix}
+= \begin{bmatrix} 
+-3 & 1 \\
+-0.75 & 0
+\end{bmatrix}
+\]
 
+Ahora, calculamos la matriz \( Q \) como:
+
+\[
+Q = W \cdot \mathcal{O}
+\]
+
+Para que puedas seguir este paso, tendrías que multiplicar las matrices \( W \) y \( \mathcal{O} \). La multiplicación de matrices se lleva a cabo de la siguiente manera:
+
+\[
+Q = \begin{bmatrix} 
+-3 & 1 \\
+-0.75 & 0
+\end{bmatrix} \begin{bmatrix} 
+0.3 & 0.2 \\
+0.9 & -0.19
+\end{bmatrix}
+\]
+
+Al realizar la multiplicación, obtienes \( Q \), la cual será utilizada para el siguiente paso.
+
+---
+
+#### **Paso 4: Determinar el Polinomio Deseado para el Observador**
+
+El polinomio deseado para el observador debe tener los polos ubicados en \( z = -0.4 \) con multiplicidad 2. El polinomio correspondiente es:
+
+\[
+(\lambda + 0.4)^2 = \lambda^2 + 0.8 \lambda + 0.16
+\]
+
+De aquí, identificamos los coeficientes \( a_1 = 0.8 \) y \( a_2 = 0.16 \).
+
+---
+
+#### **Paso 5: Calcular las Ganancias del Observador**
+
+Las ganancias del observador \( K_e \) se calculan a partir de la fórmula:
+
+\[
+K_e = Q^{-1} \begin{bmatrix} 
+a_1 - a_1' \\
+a_2 - a_2'
+\end{bmatrix}
+\]
+
+donde \( a_1' \) y \( a_2' \) son los coeficientes del polinomio característico del sistema y \( a_1 \) y \( a_2 \) son los coeficientes del polinomio deseado para el observador. 
+
+Usando las matrices y los coeficientes obtenidos, calculamos \( K_e \). Este vector de ganancias garantiza que los polos del observador estén ubicados en los valores deseados.
 
 
 
