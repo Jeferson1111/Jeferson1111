@@ -1,85 +1,172 @@
-# Controladores por Retroalimentación de Estados
 
-## Controlabilidad y Observabilidad
+# Observadores de Estados y Error de Estado Estacionario
 
-**Controlabilidad**  
-La controlabilidad se refiere a la capacidad de un sistema para ser manipulado o dirigido a cualquier estado deseado, utilizando el control adecuado.
+## Eliminación de error de estado estacionario
 
-Un sistema es controlable en un tiempo $$\( t_0 \)$$ si, desde cualquier estado inicial $$\( x(t_0) \)$$, se puede transferir a cualquier otro estado en un intervalo de tiempo finito.
-  
+Un observador de estados es un algoritmo utilizado para estimar los estados internos de un sistema dinámico cuando estos no son directamente observables. Este es un concepto muy utilizado en el control moderno para sistemas donde solo algunas salidas son medibles, pero los estados no lo son, o no se pueden medir directamente.
 
-#### Matriz de Controlabilidad
+En este contexto, uno de los problemas más comunes es el error de estado estacionario, que se refiere a la diferencia entre el estado estimado y el estado real cuando el sistema ha alcanzado un régimen estable o de equilibrio (estado estacionario). 
 
-En sistemas discretos, el comportamiento del sistema es:
+## segimiento integral
+
+El problema de eliminación de error de estado estacionario en el contexto de un sistema con seguimiento integral, primero vamos a analizar cómo se integra el concepto de observadores de estado, error de estado estacionario, y finalmente cómo se puede eliminar este error usando una ley de control con un vector de ganancias  F  para la referencia.
+
+### **Ecuaciones del Sistema en Discreto**
 
 $$\[
 x(k+1) = A x(k) + B u(k)
 \]$$
+
 $$\[
-y(k) = C x(k) + D u(k)
+y(k) = C x(k)
 \]$$
 
-Donde:
 
-$$\( x(k) \)$$ es el vector de estado en el tiempo $$\( k \)$$,
+En este caso, se propone una ley de control que incluye un vector de ganancias F  para el seguimiento de la referencia.
 
-$$\( u(k) \)$$ es el vector de control en el tiempo $$\( k \)$$,
+$$\[
+u(k) = -K x(k) + F r(k)
+\]$$
 
-$$\( y(k) \$$) es la salida en el tiempo $$\( k \)$$,
 
-$$\( A \)$$, $$\( B \)$$, y $$\( C \)$$ son matrices del sistema.
+K  es la matriz de ganancias del controlador.
 
-La matriz de controlabilidad se construye:
+x(k) es el vector de estados en el instante k.
 
-$$U=\left[ B,AB,A^{2}B,A^{3}B....A^{n-1}B \right]$$
+r(k) es la referencia del sistema (puede ser una señal deseada que se desea seguir).
 
-Si el sistema es controlable, entonces el rango de la matriz de controlabilidad debe ser igual al número de variables de estado $$\( n \)$$ y el determinante de esta matriz debe ser diferente de cero. En otras palabras, si el sistema es controlable, el rango de U es igual a n.
+F es el vector de ganancias de referencia.
+
+
+$$\[
+x(k+1) = (A - B K) x(k) + B F r(k)
+\]$$
+$$\[
+y(k) = CX(k) 
+\]$$
+
+
+### Nuevas ecuaciones de estados
+
+
+   $$\[
+   v(k+1) = v(k) + r(k) - y(k)
+   \]$$
+   
+y(k) = C x(k)
+
+v(k) es un vector auxiliar que parece estar relacionado con la referencia y la salida del sistema,
+y(k) es la salida del sistema, dada por y(k) = C x(k), donde C es la matriz de observación.
+
+se reemplaza 
+
+$$\[
+v(k+1) = v(k) + r(k) - C x(k)
+\]$$
+
+Combinando las ecuaciones
+
+Ahora, tenemos dos ecuaciones que describen la dinámica del sistema. 
+
+
+[x(k+1)/v(k+1)]=[A,0/-C,1][X(k)/v(k)]+[B/0]u(K)+[0/1]r
+
+y(k)=[C,0][x(k)v(k)]
+
+
+### seguimiento integral
+
+
+La ley de control que se presenta es una combinación de un control por estado y un control integral. La entrada de control u se expresa como:
+
+$$\[
+u = -K x + K_i v
+\]$$
+
+ x es el vector de estado del sistema.
+ 
+ K  es el vector de ganancias para la regulación de estados
+ 
+$$K_i$$ es la ganancia para el seguimiento integral
+
+ v  es el valor auxiliar que se ha introducido para manejar el seguimiento de la referencia.
+
+Reescribiendo de forma matricial:
+
+
+u=-[k-ki][x/v]
+
+u=-ka xa
+
+
+El vector  K  controla la dinámica del estado del sistema. Es de tamaño  n- 1  y se aplica directamente al estado  x(k)  del sistema. Esto regula cómo se comportan las variables de estado del sistema.
+
+La ganancia  K_i es una constante que se aplica al valor v(k) , que es un valor auxiliar utilizado para seguir la referencia r(k) y eliminar el error de estado estacionario. El valor  v(k) acumula el error entre la referencia y la salida real, y  K_i controla cómo el sistema corrige este error.
+
+reescribiendo el sistema con matrices apliadas:
+
+$$X_{A}(k+1)=A_{a}X_{a}+B_{a}u+B_{r}r$$
+
+$$y(k)=C_{a}X_{a}$$
+
+aplicando la ley de control:
+
+$$(k+1)=(A_{a}-B_{a}K_{a})X_{a}+B_{r}r$$
+
+$$x(k+1)=A_{aLC}X_{a}+B_{r}r$$
+
+### la Metodología de Diseño
+
+1. Definir el sistema ampliado: Construir las matrices $$A_a$$, $$B_a$$, y $$C_a$$.
+2. Calcular el vector $$K_a$$: Utilizar el método Acker o polos en lazo cerrado, para calcular el vector de ganancias  K_a que ubique los polos en las posiciones deseadas en el plano complejo.
+3. Definir las ganancias K  y  K_i : Desglosar el vector de ganancias  K_a.
+4. Implementar el esquema de control: Aplicar la ley de control  u(k) = -K x(k) + K_i v(k)  y controlar el sistema para eliminar el error de estado estacionario y asegurar un seguimiento preciso de la referencia.
+
 
 💡 Ejemplo
 
-A=[1.5,1/1,0]
+ Diseñar un controlador por retroalimentación de estados que ubique los polos del sistema en z+0.35)^3y que 
+realice seguimiento por medio de acción integral. Para el sistema con las siguientes matrices:
 
-B=[1/0]
+A=[-13,-5.84,5.78/-5.84,-16.26,-5.35/5.78,-5.35,-7.64]
 
-y=[2,-1]
+B=[-1.2/0.71/1.63]
 
+C=[0.48,1.3,0.72]
 
-
-Queremos verificar si el sistema es controlable.
-
-La matriz de controlabilidad  es:
-
-U=[B,AB]
-
-AB=[1.5,1/1,0][1/0]=[1.5/1]
+D=0;
 
 
-U=[1,1.5/0,1]
-
-Determinante de la matriz de controlabilidad
-
-U=[1,1.5/0,1]=1
-
-
-El determinante es 1, lo que es diferente de cero, lo que implica que el sistema es **controlable**.
+Ampliar el Sistema con la Acción Integral
 
 
 
-**Observabilidad**
+  - Matriz de transición ampliada $$\( A_a \)$$:
 
-Se dice que un sistema es observable en el tiempo %%\( t_0 \)%% si, con el sistema en el estado $$X(t_{0})$$, es posible determinar dicho estado observando la salida durante un intervalo de tiempo finito.
+Aa=[-13,-5.84,5.78,0/-5.84,-16.26,-5.35,0/5.78,-5.35,-7.64,0/-0.48,-1.03,-0.72,1]
 
-En otras palabras, la observabilidad nos permite estimar cualquier variable de estado del sistema si conocemos sus entradas y salidas durante un período de tiempo. Esta propiedad es fundamental en el diseño de sistemas de control, como los controladores por retroalimentación de estados, ya que nos permite diseñar estimadores de estados cuando los estados no son directamente medibles.
+  - Matriz de entrada ampliada $$\( B_a \)$$:
+
+Ba=[-1.2/0.71/1.63/0]
+
+  - Matriz de salida ampliada $$\( C_a \)$$:
+
+  Ca=[0.48,1.3,0.72,0]
+
+- Calcular el Vector de Ganancias  K_a  Usando Ackermann o polos(polinomio deseado en lazo cerrado).
 
 
-#### Matriz de Observabilidad
+Queremos que los polos en lazo cerrado estén ubicados en \( z = -0.35 \) con multiplicidad 3. 
+
+se calculan las ganancias $$\( K_a \)$$
 
 
-V=[C/CA/CA^{2}...CA^{n-1}]
+se dividern las ganancias
 
-Donde n es el número de estados en el sistema.su determinante debe ser diferente de cero) para que el sistema sea observable.
 
- Si el rango de la matriz de observabilidad es igual al número de estados del sistema, entonces el sistema es observable.
+4. Implementamos el esquema de control $$\( u(k) = -K x(k) + K_i v(k) \)$$ para lograr el seguimiento integral y eliminar el error de estado estacionario.
+
+
 
 
 
