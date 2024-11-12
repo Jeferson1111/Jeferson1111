@@ -247,39 +247,61 @@ Aquí, los coeficientes $$\( \alpha_1, \alpha_2, \dots, \alpha_n \)$$ correspond
 
  5. Calcular la Matriz de Ganancias del Observador
 
-$$K=Q^{-1}[\tau _{n}-a_{n}]
+$$Q^{-1}$$ [an-an]
+
 
 💡 Ejemplo
 
-se tiene un sistema con dos variables de estado y las siguientes matrices:
+Diseñar el observador de estados para el sistema:
+
+A=[1.799,-0.8025/1,0]
 
 
-A=[1.5,1/1,0]
-
-C=[2,-1]
-
-la matriz de observabilidad es:
-
-v=[C/CA]
-
-CA=[2,-1][1.5,1/1,0]=[2,2]
-
-V=[2,-1/2,2]
-
-Determinante de la matriz de observabilidad
-
-V=[2,-1/2,2]=6
+B=[0.01563,0]
 
 
- **el sistema es observable**.
+C=[0.01191,0,01107]
 
-### ¿Para qué sirven las condiciones de Controlabilidad y Observabilidad?
+ubicando los polos del observador en:
 
-Las condiciones de controlabilidad y observabilidad son fundamentales en el diseño y análisis de sistemas de control. Estas condiciones no solo determinan si un sistema es manipulable o si sus estados pueden ser estimados con precisión, sino que también garantizan la existencia de soluciones factibles para los problemas de control.
+z=-0.2  y  z=-0.2
+
+-comprobando observabilidad
+
+matriz de observabilidad
+
+v=[0.0119,0.0111/0.0325,-0.0096]
+
+determinante=-0.00004735  el sistema es observable
+
+-se obtiene el polinomio caracteristico |zI-A|
+
+|zI-A|=[z-1.799,0.8025/-1,z]
+
+|zI-A|= $$z^{2}-(1.799z)+0.8025$$
+
+a1=-1.799 y a2=0.8
+
+-Determinar la matriz Q
+
+Q=WV
+
+W=[-1.799,1/1,0]
+
+Q=[0.0111,-2.0295/0.0119,0.0111]
+
+-Se obtiene el polinomio deseado
+
+(z+0.2)(z+0.2)
+
+$$z^{2}+0.4z+0.04$$
+
+a1=0.4 y a2=0.04
+
+-se calcula las ganancias del observador
 
 
 
-## Control por retroalimentacion de estados
 
 
 
